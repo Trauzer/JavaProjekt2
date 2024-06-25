@@ -53,7 +53,7 @@ public class Database {
 
     private void loadFile() {
         for (String tableName : tables.keySet()) {
-            String path = "src/main/java/resources/" + tableName + ".txt";
+            String path = "src/main/resources/" + tableName + ".txt";
 
             if (Files.notExists(Paths.get(path))) {
                 System.out.println("File not found: " + path);
@@ -78,7 +78,7 @@ public class Database {
 
     public void saveFile() {
         for (String tableName : tables.keySet()) {
-            String path = "src/main/java/resources/" + tableName + ".txt";
+            String path = "src/main/resources/" + tableName + ".txt";
 
             if (Files.notExists(Paths.get(path))) {
                 try {
