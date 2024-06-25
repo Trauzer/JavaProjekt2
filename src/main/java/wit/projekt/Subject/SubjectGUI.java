@@ -13,16 +13,21 @@ import java.awt.event.ActionEvent;
  * przedmiotami.
  * Rozszerza PaneController.
  */
-
 public class SubjectGUI extends PaneController {
 
-    // Rejestr przedmiotów
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr przedmiotów
+     */
     private SubjectRegistry subjectRegistry;
 
-    // Interfejs graficzny studenta
+    /**
+     * Klasa prywatna reprezentująca interfejs graficzny studenta
+     */
     private StudentGUI studentGUI;
 
-    // Rejestr studentów
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr studentów
+     */
     private StudentRegistry studentRegistry;
 
     /**
@@ -33,7 +38,6 @@ public class SubjectGUI extends PaneController {
      * @param studentRegistry Rejestr studentów
      * @param studentGUI      Interfejs graficzny studenta
      */
-
     public SubjectGUI(String name, SubjectRegistry subjectRegistry, StudentRegistry studentRegistry,
             StudentGUI studentGUI) {
         super(name, new String[] { "Kod przedmiotu", "Nazwa przedmiotu" });
@@ -120,7 +124,6 @@ public class SubjectGUI extends PaneController {
      *
      * @return Panel GUI
      */
-
     public JPanel getPanel() {
         return this;
     }
@@ -130,7 +133,6 @@ public class SubjectGUI extends PaneController {
      *
      * @param e Zdarzenie akcji
      */
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("addButton")) {
@@ -249,7 +251,6 @@ public class SubjectGUI extends PaneController {
      *
      * @param code Kod przedmiotu do wyszukania
      */
-
     public void searchSubject(String code) {
         Subject subject = subjectRegistry.getSubjectByCode(code);
         if (subject != null) {

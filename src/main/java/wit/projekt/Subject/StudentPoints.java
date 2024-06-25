@@ -45,7 +45,6 @@ public class StudentPoints {
      *
      * @return Nazwa przedmiotu
      */
-
     public String getSubjectName() {
         return subjectName;
     }
@@ -55,7 +54,6 @@ public class StudentPoints {
      *
      * @return Punkty za trzecią ocenę
      */
-
     public int getThirdGradePoints() {
         return thirdGradePoints;
     }
@@ -65,7 +63,6 @@ public class StudentPoints {
      *
      * @param points Punkty do ustawienia
      */
-
     public void setThirdGradePoints(int points) {
         this.thirdGradePoints = points;
     }
@@ -75,7 +72,6 @@ public class StudentPoints {
      *
      * @return Punkty za czwartą ocenę
      */
-
     public int getFourthGradePoints() {
         return fourthGradePoints;
     }
@@ -85,7 +81,6 @@ public class StudentPoints {
      *
      * @param points Punkty do ustawienia
      */
-
     public void setFourthGradePoints(int points) {
         this.fourthGradePoints = points;
     }
@@ -95,7 +90,6 @@ public class StudentPoints {
      *
      * @return Punkty za piątą ocenę
      */
-
     public int getFifthGradePoints() {
         return fifthGradePoints;
     }
@@ -105,7 +99,6 @@ public class StudentPoints {
      *
      * @param points Punkty do ustawienia
      */
-
     public void setFifthGradePoints(int points) {
         this.fifthGradePoints = points;
     }

@@ -12,19 +12,27 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Testy jednostkowe dla klasy StudentRegistry.
+ * Ta klasa jest odpowiedzialna za testowanie funkcjonalności rejestru
+ * studentów.
+ * Obejmuje testy dodawania, edytowania, usuwania oraz przypisywania grup do
+ * studentów.
  */
-
 public class StudentRegistryTest {
-
     private StudentRegistry studentRegistry;
     private GroupRegistry groupRegistry;
     private SubjectRegistry subjectRegistry;
 
     /**
+     * Konstruktor klasy StudentRegistryTest.
+     * Wywołuje konstruktor klasy bazowej.
+     */
+    public StudentRegistryTest() {
+        super();
+    }
+
+    /**
      * Przygotowanie danych przed każdym testem.
      */
-
     @BeforeEach
     public void setUp() {
         List<String> studentData = new ArrayList<>();
@@ -39,7 +47,6 @@ public class StudentRegistryTest {
     /**
      * Test dodawania studenta do rejestru.
      */
-
     @Test
     public void testAddStudent() {
         Student student = new Student("John", "Doe", "12345");
@@ -52,7 +59,6 @@ public class StudentRegistryTest {
     /**
      * Test edycji studenta w rejestrze.
      */
-
     @Test
     public void testEditStudent() {
         Student student = new Student("John", "Doe", "12345");
@@ -67,7 +73,6 @@ public class StudentRegistryTest {
     /**
      * Test usuwania studenta z rejestru.
      */
-
     @Test
     public void testDeleteStudent() {
         Student student = new Student("John", "Doe", "12345");
@@ -82,7 +87,6 @@ public class StudentRegistryTest {
     /**
      * Test przypisywania grupy do studenta.
      */
-
     @Test
     public void testAssignGroupToStudent() {
         Student student = new Student("John", "Doe", "12345");

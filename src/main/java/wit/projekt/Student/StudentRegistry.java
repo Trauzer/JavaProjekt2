@@ -11,7 +11,6 @@ import java.util.List;
  * Klasa StudentRegistry przechowująca rejestr studentów oraz umożliwiająca
  * operacje na nich.
  */
-
 public class StudentRegistry {
     private List<Student> students; // Lista studentów
 
@@ -20,7 +19,6 @@ public class StudentRegistry {
      *
      * @param data Lista danych inicjalizacyjnych (imię, nazwisko, numer albumu)
      */
-
     public StudentRegistry(List<String> data) {
         students = new ArrayList<>();
 
@@ -41,7 +39,6 @@ public class StudentRegistry {
      *
      * @return Lista studentów
      */
-
     public List<Student> getStudents() {
         return students;
     }
@@ -51,7 +48,6 @@ public class StudentRegistry {
      *
      * @param student Obiekt studenta do dodania
      */
-
     public void addStudent(Student student) {
         students.add(student);
         JOptionPane.showMessageDialog(null, "Dodano studenta: " + student.getName() + " " + student.getSurname());
@@ -64,7 +60,6 @@ public class StudentRegistry {
      * @param newStudent  Nowy obiekt studenta z zaktualizowanymi danymi
      * @return Zaktualizowany obiekt studenta lub null, jeśli nie znaleziono
      */
-
     public Student editStudent(String albumNumber, Student newStudent) {
         for (Student student : students) {
             if (student.getAlbumNumber().equals(albumNumber)) {
@@ -85,7 +80,6 @@ public class StudentRegistry {
      *
      * @param albumNumber Numer albumu studenta do usunięcia
      */
-
     public void deleteStudent(String albumNumber) {
         students.removeIf(student -> student.getAlbumNumber().equals(albumNumber));
     }
@@ -96,7 +90,6 @@ public class StudentRegistry {
      * @param albumNumber Numer albumu studenta do wyszukania
      * @return Obiekt studenta lub null, jeśli nie znaleziono
      */
-
     public Student getStudentByAlbumNumber(String albumNumber) {
         for (Student student : students) {
             if (student.getAlbumNumber().equals(albumNumber)) {
@@ -112,7 +105,6 @@ public class StudentRegistry {
      * @param student Student, któremu ma być przypisana grupa
      * @param group   Grupa do przypisania
      */
-
     public void assignGroupToStudent(Student student, Group group) {
         System.out.println("Assigning group " + (group != null ? group.getGroupCode() : "null") + " to student "
                 + student.getAlbumNumber());
@@ -134,7 +126,6 @@ public class StudentRegistry {
     /**
      * Metoda zapisująca dane studentów do bazy danych.
      */
-
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Student student : students) {

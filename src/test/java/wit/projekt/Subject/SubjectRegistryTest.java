@@ -14,17 +14,25 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Testy jednostkowe dla klasy SubjectRegistry.
+ * Klasa SubjectRegistryTest zawiera testy sprawdzające poprawność działania
+ * metod klasy SubjectRegistry.
  */
-
 public class SubjectRegistryTest {
 
     private SubjectRegistry subjectRegistry;
     private StudentRegistry studentRegistry;
 
     /**
+     * Konstruktor domyślny dla klasy testowej SubjectRegistryTest.
+     * Wywołuje konstruktor klasy bazowej.
+     */
+    public SubjectRegistryTest() {
+        super();
+    }
+
+    /**
      * Przygotowanie danych przed każdym testem.
      */
-
     @BeforeEach
     public void setUp() {
         List<String> subjectData = new ArrayList<>();
@@ -37,7 +45,6 @@ public class SubjectRegistryTest {
     /**
      * Test dodawania przedmiotu do rejestru.
      */
-
     @Test
     public void testAddSubject() {
         Subject subject = new Subject("MATH101", "Mathematics");
@@ -50,7 +57,6 @@ public class SubjectRegistryTest {
     /**
      * Test edycji przedmiotu w rejestrze.
      */
-
     @Test
     public void testEditSubject() {
         Subject subject = new Subject("MATH101", "Mathematics");
@@ -65,7 +71,6 @@ public class SubjectRegistryTest {
     /**
      * Test usuwania przedmiotu z rejestracji.
      */
-
     @Test
     public void testDeleteSubject() {
         Subject subject = new Subject("MATH101", "Mathematics");
@@ -80,7 +85,6 @@ public class SubjectRegistryTest {
     /**
      * Test dodawania oceny dla studenta.
      */
-
     @Test
     public void testAddGradeToStudent() {
         Student student = new Student("John", "Doe", "12345");

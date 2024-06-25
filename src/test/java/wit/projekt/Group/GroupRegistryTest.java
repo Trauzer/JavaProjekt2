@@ -14,15 +14,26 @@ import org.junit.jupiter.api.Test;
  * Testy jednostkowe dla klasy GroupRegistry.
  */
 
+/**
+ * Klasa testowa dla GroupRegistry, zawierająca testy jednostkowe sprawdzające
+ * poprawność działania metod klasy GroupRegistry.
+ */
 public class GroupRegistryTest {
 
-    private GroupRegistry groupRegistry;
-    private StudentRegistry studentRegistry;
+    private GroupRegistry groupRegistry; // Rejestr grup.
+    private StudentRegistry studentRegistry; // Rejestr studentów.
+
+    /**
+     * Konstruktor klasy GroupRegistryTest.
+     * Wywołuje konstruktor klasy bazowej.
+     */
+    public GroupRegistryTest() {
+        super();
+    }
 
     /**
      * Przygotowanie danych przed każdym testem.
      */
-
     @BeforeEach
     public void setUp() {
         List<String> groupData = new ArrayList<>();
@@ -35,7 +46,6 @@ public class GroupRegistryTest {
     /**
      * Test dodawania grupy do rejestru.
      */
-
     @Test
     public void testAddGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -48,7 +58,6 @@ public class GroupRegistryTest {
     /**
      * Test edycji grupy w rejestrze.
      */
-
     @Test
     public void testEditGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -63,7 +72,6 @@ public class GroupRegistryTest {
     /**
      * Test usuwania grupy z rejestru.
      */
-
     @Test
     public void testDeleteGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -78,7 +86,6 @@ public class GroupRegistryTest {
     /**
      * Test przypisywania studenta do grupy.
      */
-
     @Test
     public void testAssignStudentToGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -96,7 +103,6 @@ public class GroupRegistryTest {
     /**
      * Test odłączania studenta od grupy.
      */
-
     @Test
     public void testUnassignStudentFromGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");

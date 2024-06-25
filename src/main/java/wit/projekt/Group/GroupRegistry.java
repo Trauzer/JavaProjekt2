@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Klasa rejestru grup.
  */
-
 public class GroupRegistry {
     private List<Group> groups = new ArrayList<>(); // Lista przechowująca grupy
 
@@ -18,7 +17,6 @@ public class GroupRegistry {
      * 
      * @param data Lista danych w formacie: [kod grupy, specjalizacja, opis, ...]
      */
-
     public GroupRegistry(List<String> data) {
         if (data.size() > 0) {
             for (int i = 0; i < data.size(); i += 3) {
@@ -35,7 +33,6 @@ public class GroupRegistry {
      * 
      * @return Lista wszystkich grup
      */
-
     public List<Group> getGroups() {
         return groups;
     }
@@ -45,7 +42,6 @@ public class GroupRegistry {
      * 
      * @param group Nowa grupa do dodania
      */
-
     public void addGroup(Group group) {
         groups.add(group);
     }
@@ -57,7 +53,6 @@ public class GroupRegistry {
      * @param newGroup  Nowa zawartość grupy
      * @return Edytowana grupa lub null, jeżeli grupa nie została znaleziona
      */
-
     public Group editGroup(String groupCode, Group newGroup) {
         for (Group group : groups) {
             if (group.getGroupCode().equals(groupCode)) {
@@ -74,7 +69,6 @@ public class GroupRegistry {
      * 
      * @param groupCode Kod grupy do usunięcia
      */
-
     public void deleteGroup(String groupCode) {
         groups.removeIf(group -> group.getGroupCode().equals(groupCode));
     }
@@ -85,7 +79,6 @@ public class GroupRegistry {
      * @param groupCode Kod grupy do wyszukania
      * @return Znaleziona grupa lub null, jeżeli grupa nie została znaleziona
      */
-
     public Group getGroupByCode(String groupCode) {
         for (Group group : groups) {
             if (group.getGroupCode().equals(groupCode)) {
@@ -99,7 +92,6 @@ public class GroupRegistry {
      * Metoda zapisująca dane grup do bazy danych.
      * Zapisuje kod grupy, specjalizację i opis każdej grupy z listy do bazy danych.
      */
-
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Group group : groups) {

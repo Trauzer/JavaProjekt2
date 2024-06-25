@@ -13,15 +13,23 @@ import javax.swing.*;
 
 /**
  * Główna klasa aplikacji.
+ * Inicjalizuje aplikację i jej komponenty.
  */
 public class Main {
-    // Obiekt do zarządzania bazą danych
     static Database database = new Database();
 
     // Rejestry dla danych głównych
     static StudentRegistry studentRegistry = new StudentRegistry(database.get("students"));
     static GroupRegistry groupRegistry = new GroupRegistry(database.get("groups"));
     static SubjectRegistry subjectRegistry = new SubjectRegistry(database.get("subjects"));
+
+    /**
+     * Domyślny konstruktor dla klasy Main.
+     * Inicjalizuje aplikację.
+     */
+    public Main() {
+        super(); // Wywołanie konstruktora klasy nadrzędnej
+    }
 
     /**
      * Metoda główna aplikacji.
