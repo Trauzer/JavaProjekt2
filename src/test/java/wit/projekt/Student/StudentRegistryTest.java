@@ -36,17 +36,6 @@ public class StudentRegistryTest {
         studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
 
-    /**
-     * Przygotowanie danych przed każdym testem.
-     */
-    @BeforeEach
-    public void setUp() {
-        List<String> groupData = new ArrayList<>();
-        List<String> studentData = new ArrayList<>();
-
-        groupRegistry = new GroupRegistry(groupData);
-        studentRegistry = new StudentRegistry(studentData, groupRegistry);
-    }
 
     /**
      * Test dodawania studenta do rejestru.

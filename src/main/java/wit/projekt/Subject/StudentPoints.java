@@ -5,8 +5,8 @@ package wit.projekt.Subject;
  */
 
 public class StudentPoints {
-    private String studentAlbumNumber; // Numer albumu studenta
-    private String subjectName; // Nazwa przedmiotu
+    private final String studentAlbumNumber; // Numer albumu studenta
+    private final String subjectName; // Nazwa przedmiotu
     private int thirdGradePoints; // Punkty zaliczenia za ocenę trzy
     private int fourthGradePoints; // Punkty zaliczenia za ocenę cztery
     private int fifthGradePoints; // Punkty zaliczenia za ocenę pięć

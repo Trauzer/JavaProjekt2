@@ -12,7 +12,7 @@ import java.awt.event.WindowAdapter;
  */
 
 public class Frame extends JFrame {
-    private JTabbedPane tabbedPane = new JTabbedPane();
+    private final JTabbedPane tabbedPane = new JTabbedPane();
 
     /**
      * Konstruktor klasy Frame.

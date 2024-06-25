@@ -14,7 +14,7 @@ public class Student {
     private String surname; // Nazwisko studenta
     private String albumNumber; // Numer albumu studenta
     private Group group; // Grupa studenta
-    private Map<String, Integer> subjectGrades; // Mapa ocen studenta z korespondującymi kodami przedmiotów
+    private final Map<String, Integer> subjectGrades; // Mapa ocen studenta z korespondującymi kodami przedmiotów
 
     /**
      * Konstruktor klasy Student.
@@ -75,7 +75,6 @@ public class Student {
     /**
      * Metoda zwracająca numer albumu studenta.
      *
-     * @return Numer albumu studenta
      */
 
     public void setAlbumNumber(String albumNumber) {

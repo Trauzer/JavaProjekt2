@@ -2,6 +2,7 @@ package wit.projekt.Group;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import wit.projekt.Student.Student;
 import wit.projekt.Student.StudentRegistry;
 
 import java.util.ArrayList;

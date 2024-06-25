@@ -9,7 +9,7 @@ import java.util.List;
  * Klasa odpowiedzialna za zarządzanie rejestracją przedmiotów.
  */
 public class SubjectRegistry {
-    private List<Subject> subjects = new ArrayList<>();
+    private final List<Subject> subjects = new ArrayList<>();
 
     /**
      * Konstruktor klasy SubjectRegistry.
@@ -91,10 +91,9 @@ public class SubjectRegistry {
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Subject subject : subjects) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(subject.getCode()).append(";")
-              .append(subject.getName());
-            data.add(sb.toString());
+            String sb = subject.getCode() + ";" +
+                    subject.getName();
+            data.add(sb);
         }
         Database.save("subjects", data);
     }

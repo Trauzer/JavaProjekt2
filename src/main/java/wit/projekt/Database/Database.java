@@ -10,7 +10,7 @@ import java.util.*;
  */
 
 public class Database {
-    private static HashMap<String, List<String>> tables = new HashMap<>();
+    private static final HashMap<String, List<String>> tables = new HashMap<>();
 
     /**
      * Konstruktor klasy Database. Inicjuje listy dla poszczególnych tabel i

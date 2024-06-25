@@ -13,7 +13,7 @@ public class Group {
     private String groupCode; // Kod grupy
     private String specialization; // Specjalizacja grupy
     private String description; // Opis grupy
-    private List<Student> students; // Lista studentów w grupie
+    private final List<Student> students; // Lista studentów w grupie
 
     /**
      * Konstruktor klasy Group.

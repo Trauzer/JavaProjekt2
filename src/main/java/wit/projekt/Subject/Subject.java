@@ -55,7 +55,6 @@ public class Subject {
     /**
      * Metoda zwracająca nazwę przedmiotu.
      *
-     * @return Nazwa przedmiotu
      */
 
     public void setName(String name) {

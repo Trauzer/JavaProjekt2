@@ -1,2 +1,0 @@
-tes;ttest;123;08;pr03;2;s01;2
-tes2;ttest2;1234;Brak grupy;pr03;3;s01;3
