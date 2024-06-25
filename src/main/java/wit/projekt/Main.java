@@ -13,6 +13,7 @@ import javax.swing.*;
 
 /**
  * Główna klasa aplikacji.
+ * Inicjalizuje aplikację i jej komponenty.
  */
 public class Main {
     // Obiekt do zarządzania bazą danych
@@ -24,6 +25,14 @@ public class Main {
     static SubjectRegistry subjectRegistry = new SubjectRegistry(database.get("subjects"));
 
     /**
+     * Domyślny konstruktor dla klasy Main.
+     * Inicjalizuje aplikację.
+     */
+    public Main() {
+        super(); // Wywołanie konstruktora klasy nadrzędnej
+    }
+
+    /**
      * Metoda główna aplikacji.
      * Tworzy interfejs graficzny i uruchamia główne panele.
      *
@@ -31,16 +40,17 @@ public class Main {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            // Tworzenie głównego okna aplikacji
             Frame frame = new Frame();
-
+            // Tworzenie paneli GUI dla Studentów, Grup i Przedmiotów
             StudentGUI studentGUI = new StudentGUI("STUDENTS", studentRegistry, groupRegistry, subjectRegistry);
             GroupGUI groupGUI = new GroupGUI("GROUPS", groupRegistry, studentRegistry, studentGUI);
             SubjectGUI subjectGUI = new SubjectGUI("SUBJECTS", subjectRegistry, studentRegistry, studentGUI);
-
+            // Dodawanie paneli do głównego okna
             frame.addPanelToPane("Students", studentGUI.getPanel());
             frame.addPanelToPane("Groups", groupGUI.getPanel());
             frame.addPanelToPane("Subjects", subjectGUI.getPanel());
-
+            // Ustawienie widoczności okna
             frame.setVisible(true);
         });
     }

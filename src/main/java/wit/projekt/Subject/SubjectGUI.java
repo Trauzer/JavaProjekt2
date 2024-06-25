@@ -16,13 +16,19 @@ import java.awt.event.ActionEvent;
 
 public class SubjectGUI extends PaneController {
 
-    // Rejestr przedmiotów
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr przedmiotów
+     */
     private final SubjectRegistry subjectRegistry;
 
-    // Interfejs graficzny studenta
+    /**
+     * Klasa prywatna reprezentująca interfejs graficzny studenta
+     */
     private final StudentGUI studentGUI;
 
-    // Rejestr studentów
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr studentów
+     */
     private final StudentRegistry studentRegistry;
 
     /**

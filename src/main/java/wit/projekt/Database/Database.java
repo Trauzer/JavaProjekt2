@@ -8,7 +8,6 @@ import java.util.*;
  * Klasa Database odpowiada za zarządzanie bazą danych w formie plików
  * tekstowych.
  */
-
 public class Database {
     private static final HashMap<String, List<String>> tables = new HashMap<>();
 
@@ -16,7 +15,6 @@ public class Database {
      * Konstruktor klasy Database. Inicjuje listy dla poszczególnych tabel i
      * wczytuje dane z plików.
      */
-
     public Database() {
         tables.put("students", new ArrayList<>());
         tables.put("subjects", new ArrayList<>());
@@ -31,7 +29,6 @@ public class Database {
      * @param tableName Nazwa tabeli
      * @return Lista danych z tabeli
      */
-
     public List<String> get(String tableName) {
         return tables.getOrDefault(tableName, new ArrayList<>());
     }
@@ -42,7 +39,6 @@ public class Database {
      * @param tableName Nazwa tabeli
      * @param data      Lista danych do zapisu
      */
-
     public static void save(String tableName, List<String> data) {
         tables.put(tableName, data);
     }
@@ -50,7 +46,6 @@ public class Database {
     /**
      * Metoda wczytująca dane z plików do odpowiednich tabel.
      */
-
     private void loadFile() {
         for (String tableName : tables.keySet()) {
             String path = "src/main/resources/" + tableName + ".txt";

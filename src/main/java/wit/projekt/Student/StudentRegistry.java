@@ -19,9 +19,10 @@ public class StudentRegistry {
     /**
      * Konstruktor klasy StudentRegistry.
      *
-     * @param data Lista danych inicjalizacyjnych (imię, nazwisko, numer albumu)
+     * @param data          Lista danych inicjalizacyjnych (imię, nazwisko, numer
+     *                      albumu)
+     * @param groupRegistry Rejestr grup, do którego należą studenci
      */
-
     public StudentRegistry(List<String> data, GroupRegistry groupRegistry) {
         this.groupRegistry = groupRegistry;
         students = new ArrayList<>();
@@ -49,7 +50,6 @@ public class StudentRegistry {
      *
      * @return Lista studentów
      */
-
     public List<Student> getStudents() {
         return students;
     }
@@ -59,7 +59,6 @@ public class StudentRegistry {
      *
      * @param student Obiekt studenta do dodania
      */
-
     public void addStudent(Student student) {
         students.add(student);
         JOptionPane.showMessageDialog(null, "Dodano studenta: " + student.getName() + " " + student.getSurname());
@@ -72,14 +71,14 @@ public class StudentRegistry {
      * @param newStudent  Nowy obiekt studenta z zaktualizowanymi danymi
      * @return Zaktualizowany obiekt studenta lub null, jeśli nie znaleziono
      */
-
     public Student editStudent(String albumNumber, Student newStudent) {
         for (Student student : students) {
             if (student.getAlbumNumber().equals(albumNumber)) {
                 newStudent.getAllGrades().putAll(student.getAllGrades());
                 deleteStudent(albumNumber);
                 students.add(newStudent);
-                JOptionPane.showMessageDialog(null, "Zaktualizowano dane studenta: " + student.getName() + " " + student.getSurname() + " " + student.getAlbumNumber());
+                JOptionPane.showMessageDialog(null, "Zaktualizowano dane studenta: " + student.getName() + " "
+                        + student.getSurname() + " " + student.getAlbumNumber());
                 return student;
             }
         }
@@ -91,7 +90,6 @@ public class StudentRegistry {
      *
      * @param albumNumber Numer albumu studenta do usunięcia
      */
-
     public void deleteStudent(String albumNumber) {
         students.removeIf(student -> student.getAlbumNumber().equals(albumNumber));
     }
@@ -102,7 +100,6 @@ public class StudentRegistry {
      * @param albumNumber Numer albumu studenta do wyszukania
      * @return Obiekt studenta lub null, jeśli nie znaleziono
      */
-
     public Student getStudentByAlbumNumber(String albumNumber) {
         for (Student student : students) {
             if (student.getAlbumNumber().equals(albumNumber)) {
@@ -118,12 +115,12 @@ public class StudentRegistry {
      * @param student Student, któremu ma być przypisana grupa
      * @param group   Grupa do przypisania
      */
-
     public void assignGroupToStudent(Student student, Group group) {
         for (Student s : students) {
             if (s.getAlbumNumber().equals(student.getAlbumNumber())) {
                 s.setGroup(group);
-                JOptionPane.showMessageDialog(null, "Zaktualizowano grupę studenta: " + s.getName() + " " + s.getSurname() + " na grupę " + (group != null ? group.getGroupCode() : "Brak grupy"));
+                JOptionPane.showMessageDialog(null, "Zaktualizowano grupę studenta: " + s.getName() + " "
+                        + s.getSurname() + " na grupę " + (group != null ? group.getGroupCode() : "Brak grupy"));
                 break;
             }
         }
@@ -132,15 +129,14 @@ public class StudentRegistry {
     /**
      * Metoda zapisująca dane studentów do bazy danych.
      */
-
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Student student : students) {
             StringBuilder sb = new StringBuilder();
             sb.append(student.getName()).append(";")
-              .append(student.getSurname()).append(";")
-              .append(student.getAlbumNumber()).append(";")
-              .append(student.getGroupCode());
+                    .append(student.getSurname()).append(";")
+                    .append(student.getAlbumNumber()).append(";")
+                    .append(student.getGroupCode());
             for (Map.Entry<String, Integer> entry : student.getAllGrades().entrySet()) {
                 sb.append(";").append(entry.getKey()).append(";").append(entry.getValue());
             }
