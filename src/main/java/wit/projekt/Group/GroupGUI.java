@@ -82,7 +82,7 @@ public class GroupGUI extends PaneController {
         JButton editButton = createButton("editButton", "Edytuj grupę");
         buttonPanel.add(editButton);
 
-        JButton searchButton = createButton("searchButton", "Szukaj ucznia");
+        JButton searchButton = createButton("searchButton", "Szukaj grupę");
         buttonPanel.add(searchButton);
     }
 

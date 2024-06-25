@@ -89,7 +89,7 @@ public class SubjectGUI extends PaneController {
         JButton editButton = createButton("editButton", "Edytuj przedmiot");
         buttonPanel.add(editButton);
 
-        JButton searchButton = createButton("searchButton", "Szukaj ucznia");
+        JButton searchButton = createButton("searchButton", "Szukaj przedmiotu");
         buttonPanel.add(searchButton);
     }
 
