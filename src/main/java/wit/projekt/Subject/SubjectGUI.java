@@ -167,9 +167,8 @@ public class SubjectGUI extends PaneController {
             // Usunięcie kolumny z tabeli studentów
         }
 
-        if (e.getActionCommand().equals("addGradeButton")) {
+        if (e.getActionCommand().equals("addPointsButton")) {
             // Dodanie oceny dla studenta
-
             String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
             String pointsStr = fields.get("points").getText();
 
@@ -249,6 +248,17 @@ public class SubjectGUI extends PaneController {
         }
     }
 
+    private int calculateGrade(int points) {
+        if (points > 90) {
+            return 5;
+        } else if (points > 70) {
+            return 4;
+        } else if (points > 50) {
+            return 3;
+        } else {
+            return 2;
+        }
+    }
 
     private int calculateGrade(int points) {
         if (points > 90) {

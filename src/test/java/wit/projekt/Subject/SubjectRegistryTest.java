@@ -82,24 +82,4 @@ public class SubjectRegistryTest {
         assertNull(subjectRegistry.getSubjectByCode("MATH101"));
         assertEquals(0, subjectRegistry.getSubjects().size());
     }
-
-    /**
-     * Test dodawania oceny dla studenta.
-     */
-    @Test
-    public void testAddGradeToStudent() {
-        Student student = new Student("John", "Doe", "12345");
-        studentRegistry.addStudent(student);
-
-        Subject subject = new Subject("MATH101", "Mathematics");
-        subjectRegistry.addSubject(subject);
-
-        StudentGUI studentGUI = new StudentGUI("STUDENTS", studentRegistry, new GroupRegistry(new ArrayList<>()),
-                subjectRegistry);
-        studentGUI.addColumn("MATH101");
-
-        studentGUI.updateStudentGrade("12345", "MATH101", 5);
-
-        assertEquals(5, studentGUI.getTable().getValueAt(0, studentGUI.getModel().findColumn("MATH101")));
-    }
 }

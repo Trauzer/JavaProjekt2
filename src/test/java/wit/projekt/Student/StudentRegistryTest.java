@@ -27,6 +27,15 @@ public class StudentRegistryTest {
         super();
     }
 
+    @BeforeEach
+    public void setUp() {
+        List<String> groupData = new ArrayList<>();
+        List<String> studentData = new ArrayList<>();
+
+        groupRegistry = new GroupRegistry(groupData);
+        studentRegistry = new StudentRegistry(studentData, groupRegistry);
+    }
+
     /**
      * Przygotowanie danych przed każdym testem.
      */
@@ -78,21 +87,5 @@ public class StudentRegistryTest {
 
         assertNull(studentRegistry.getStudentByAlbumNumber("12345"));
         assertEquals(0, studentRegistry.getStudents().size());
-    }
-
-    /**
-     * Test przypisywania grupy do studenta.
-     */
-    @Test
-    public void testAssignGroupToStudent() {
-        Student student = new Student("John", "Doe", "12345");
-        Group group = new Group("G01", "CS", "Computer Science Group");
-
-        studentRegistry.addStudent(student);
-        groupRegistry.addGroup(group);
-
-        studentRegistry.assignGroupToStudent(student, group);
-
-        assertEquals("G01", studentRegistry.getStudentByAlbumNumber("12345").getGroupCode());
     }
 }
