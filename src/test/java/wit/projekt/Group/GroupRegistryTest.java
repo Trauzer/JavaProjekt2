@@ -9,11 +9,30 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testy jednostkowe dla klasy GroupRegistry.
+ */
+
+/**
+ * Klasa testowa dla GroupRegistry, zawierająca testy jednostkowe sprawdzające
+ * poprawność działania metod klasy GroupRegistry.
+ */
 public class GroupRegistryTest {
 
-    private GroupRegistry groupRegistry;
-    private StudentRegistry studentRegistry;
+    private GroupRegistry groupRegistry; // Rejestr grup.
+    private StudentRegistry studentRegistry; // Rejestr studentów.
 
+    /**
+     * Konstruktor klasy GroupRegistryTest.
+     * Wywołuje konstruktor klasy bazowej.
+     */
+    public GroupRegistryTest() {
+        super();
+    }
+
+    /**
+     * Przygotowanie danych przed każdym testem.
+     */
     @BeforeEach
     public void setUp() {
         List<String> groupData = new ArrayList<>();
@@ -23,6 +42,9 @@ public class GroupRegistryTest {
         studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
 
+    /**
+     * Test dodawania grupy do rejestru.
+     */
     @Test
     public void testAddGroup() {
         Group group = new Group("CS101", "Computer Science", "CS Group");
@@ -32,6 +54,9 @@ public class GroupRegistryTest {
         assertEquals("Computer Science", groupRegistry.getGroupByCode("CS101").getSpecialization());
     }
 
+    /**
+     * Test edycji grupy w rejestrze.
+     */
     @Test
     public void testEditGroup() {
         Group group = new Group("CS101", "Computer Science", "CS Group");
@@ -43,6 +68,9 @@ public class GroupRegistryTest {
         assertEquals("Advanced Computer Science", groupRegistry.getGroupByCode("CS101").getSpecialization());
     }
 
+    /**
+     * Test usuwania grupy z rejestru.
+     */
     @Test
     public void testDeleteGroup() {
         Group group = new Group("CS101", "Computer Science", "CS Group");
@@ -52,5 +80,40 @@ public class GroupRegistryTest {
 
         assertNull(groupRegistry.getGroupByCode("CS101"));
         assertEquals(0, groupRegistry.getGroups().size());
+    }
+
+    /**
+     * Test przypisywania studenta do grupy.
+     */
+    @Test
+    public void testAssignStudentToGroup() {
+        Group group = new Group("G01", "CS", "Computer Science Group");
+        Student student = new Student("John", "Doe", "12345");
+
+        groupRegistry.addGroup(group);
+        studentRegistry.addStudent(student);
+
+        group.addStudent(student);
+
+        assertEquals("G01", student.getGroupCode());
+        assertEquals(1, group.getStudents().size());
+    }
+
+    /**
+     * Test odłączania studenta od grupy.
+     */
+    @Test
+    public void testUnassignStudentFromGroup() {
+        Group group = new Group("G01", "CS", "Computer Science Group");
+        Student student = new Student("John", "Doe", "12345");
+
+        groupRegistry.addGroup(group);
+        studentRegistry.addStudent(student);
+
+        group.addStudent(student);
+        group.removeStudent(student);
+
+        assertEquals("Brak grupy", student.getGroupCode());
+        assertEquals(0, group.getStudents().size());
     }
 }

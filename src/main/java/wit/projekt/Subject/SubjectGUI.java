@@ -8,41 +8,73 @@ import wit.projekt.Student.StudentRegistry;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Klasa SubjectGUI odpowiedzialna za interfejs użytkownika związanego z
+ * przedmiotami.
+ * Rozszerza PaneController.
+ */
 public class SubjectGUI extends PaneController {
 
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr przedmiotów
+     */
     private SubjectRegistry subjectRegistry;
+
+    /**
+     * Klasa prywatna reprezentująca interfejs graficzny studenta
+     */
     private StudentGUI studentGUI;
+
+    /**
+     * Klasa prywatna reprezentująca interfejs rejestr studentów
+     */
     private StudentRegistry studentRegistry;
 
-    public SubjectGUI(String name, SubjectRegistry subjectRegistry, StudentRegistry studentRegistry, StudentGUI studentGUI) {
-        super(name, new String[]{"Kod przedmiotu", "Nazwa przedmiotu"});
+    /**
+     * Konstruktor klasy SubjectGUI.
+     *
+     * @param name            Nazwa okna
+     * @param subjectRegistry Rejestr przedmiotów
+     * @param studentRegistry Rejestr studentów
+     * @param studentGUI      Interfejs graficzny studenta
+     */
+    public SubjectGUI(String name, SubjectRegistry subjectRegistry, StudentRegistry studentRegistry,
+            StudentGUI studentGUI) {
+        super(name, new String[] { "Kod przedmiotu", "Nazwa przedmiotu" });
         this.subjectRegistry = subjectRegistry;
         this.studentRegistry = studentRegistry;
         this.studentGUI = studentGUI;
 
+        // Dodanie pól do tabeli
         for (Subject subject : subjectRegistry.getSubjects()) {
             addFieldToTable(subject.getFields());
         }
 
+        // Inicjalizacja pól tekstowych
         fields.put("code", new JTextField(10));
         fields.put("name", new JTextField(10));
         fields.put("studentAlbumNumber", new JTextField(10));
         fields.put("points", new JTextField(10));
 
+        // Ustawienie layoutu dla panelu pól i przycisków
         fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
 
+        // Dodanie etykiet i pól tekstowych do panelu pól
         fieldPanel.add(new JLabel("Numer albumu studenta:"));
         fieldPanel.add(fields.get("studentAlbumNumber"));
         fieldPanel.add(new JLabel("Liczba punktów:"));
         fieldPanel.add(fields.get("points"));
 
+        // Ustawienie layoutu dla panelu przycisków
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
+        // Dodanie etykiet i pól tekstowych do panelu przycisków
         buttonPanel.add(new JLabel("Kod przedmiotu:"));
         buttonPanel.add(fields.get("code"));
         buttonPanel.add(new JLabel("Nazwa:"));
         buttonPanel.add(fields.get("name"));
 
+        // Utworzenie i dodanie przycisków do panelu przycisków
         JButton addButton = createButton("addButton", "Dodaj przedmiot");
         buttonPanel.add(addButton);
 
@@ -87,13 +119,24 @@ public class SubjectGUI extends PaneController {
         }
     }
 
+    /**
+     * Metoda zwracająca panel GUI.
+     *
+     * @return Panel GUI
+     */
     public JPanel getPanel() {
         return this;
     }
 
+    /**
+     * Obsługa zdarzeń akcji.
+     *
+     * @param e Zdarzenie akcji
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("addButton")) {
+            // Dodanie nowego przedmiotu
             String code = fields.get("code").getText();
             String name = fields.get("name").getText();
 
@@ -111,6 +154,7 @@ public class SubjectGUI extends PaneController {
         }
 
         if (e.getActionCommand().equals("deleteButton")) {
+            // Usunięcie przedmiotu
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(null, "Nie wybrano przedmiotu do usunięcia");
                 return;
@@ -121,10 +165,10 @@ public class SubjectGUI extends PaneController {
             deleteRow(selectedRow);
 
             // Usunięcie kolumny z tabeli studentów
-            // This part would need to be implemented in the StudentGUI class
         }
 
         if (e.getActionCommand().equals("addPointsButton")) {
+            // Dodanie oceny dla studenta
             String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
             String pointsStr = fields.get("points").getText();
 
@@ -171,6 +215,7 @@ public class SubjectGUI extends PaneController {
         }
 
         if (e.getActionCommand().equals("editButton")) {
+            // Edycja przedmiotu
             if (selectedRow == -1) {
                 JOptionPane.showMessageDialog(null, "Nie wybrano przedmiotu do edycji");
                 return;
@@ -192,6 +237,7 @@ public class SubjectGUI extends PaneController {
 
         }
 
+        // Wyszukiwanie przedmiotu
         if (e.getActionCommand().equals("searchButton")) {
             String code = fields.get("code").getText();
             if (!code.isEmpty()) {
@@ -214,6 +260,23 @@ public class SubjectGUI extends PaneController {
         }
     }
 
+    private int calculateGrade(int points) {
+        if (points > 90) {
+            return 5;
+        } else if (points > 70) {
+            return 4;
+        } else if (points > 50) {
+            return 3;
+        } else {
+            return 2;
+        }
+    }
+
+    /**
+     * Metoda wyszukująca przedmiot po kodzie.
+     *
+     * @param code Kod przedmiotu do wyszukania
+     */
     public void searchSubject(String code) {
         Subject subject = subjectRegistry.getSubjectByCode(code);
         if (subject != null) {

@@ -5,9 +5,18 @@ import wit.projekt.Database.Database;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa rejestru grup.
+ */
 public class GroupRegistry {
-    private List<Group> groups = new ArrayList<>();
+    private List<Group> groups = new ArrayList<>(); // Lista przechowująca grupy
 
+    /**
+     * Konstruktor klasy GroupRegistry.
+     * Tworzy listę grup na podstawie dostarczonych danych.
+     * 
+     * @param data Lista danych w formacie: [kod grupy, specjalizacja, opis, ...]
+     */
     public GroupRegistry(List<String> data) {
         if (!data.isEmpty()) {
             for (String line : data) {
@@ -17,14 +26,31 @@ public class GroupRegistry {
         }
     }
 
+    /**
+     * Metoda zwracająca listę wszystkich grup.
+     * 
+     * @return Lista wszystkich grup
+     */
     public List<Group> getGroups() {
         return groups;
     }
 
+    /**
+     * Metoda dodająca nową grupę do rejestru.
+     * 
+     * @param group Nowa grupa do dodania
+     */
     public void addGroup(Group group) {
         groups.add(group);
     }
 
+    /**
+     * Metoda edytująca istniejącą grupę na podstawie kodu grupy.
+     * 
+     * @param groupCode Kod grupy do edycji
+     * @param newGroup  Nowa zawartość grupy
+     * @return Edytowana grupa lub null, jeżeli grupa nie została znaleziona
+     */
     public Group editGroup(String groupCode, Group newGroup) {
         for (Group group : groups) {
             if (group.getGroupCode().equals(groupCode)) {
@@ -36,10 +62,21 @@ public class GroupRegistry {
         return null;
     }
 
+    /**
+     * Metoda usuwająca grupę na podstawie kodu grupy.
+     * 
+     * @param groupCode Kod grupy do usunięcia
+     */
     public void deleteGroup(String groupCode) {
         groups.removeIf(group -> group.getGroupCode().equals(groupCode));
     }
 
+    /**
+     * Metoda wyszukująca grupę po kodzie grupy.
+     * 
+     * @param groupCode Kod grupy do wyszukania
+     * @return Znaleziona grupa lub null, jeżeli grupa nie została znaleziona
+     */
     public Group getGroupByCode(String groupCode) {
         for (Group group : groups) {
             if (group.getGroupCode().equals(groupCode)) {
@@ -49,6 +86,10 @@ public class GroupRegistry {
         return null;
     }
 
+    /**
+     * Metoda zapisująca dane grup do bazy danych.
+     * Zapisuje kod grupy, specjalizację i opis każdej grupy z listy do bazy danych.
+     */
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Group group : groups) {

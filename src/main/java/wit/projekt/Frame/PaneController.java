@@ -7,14 +7,51 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Abstrakcyjna klasa PaneController implementująca panel GUI dla kontrolerów.
+ * Klasa ta zawiera podstawowe funkcje do zarządzania tabelą, polami tekstowymi
+ * i przyciskami.
+ */
 public abstract class PaneController extends JPanel implements ActionListener {
+    /**
+     * Panel używany do przechowywania pól danych.
+     * Jest to panel do którego dodawane są pola tekstowe, etykiety itp.
+     */
     protected JPanel fieldPanel = new JPanel();
+
+    /**
+     * Panel używany do przechowywania przycisków.
+     * Jest to panel do którego dodawane są przyciski.
+     */
     protected JPanel buttonPanel = new JPanel();
+
+    /**
+     * Tabela wyświetlająca dane.
+     */
     protected JTable table = new JTable();
+
+    /**
+     * Model danych tabeli.
+     */
     protected DefaultTableModel model;
+
+    /**
+     * Mapa pól tekstowych.
+     * Kluczami są nazwy pól, a wartościami obiekty JTextField.
+     */
     protected HashMap<String, JTextField> fields = new HashMap<>();
+
+    /**
+     * Numer zaznaczonego wiersza (-1 oznacza brak zaznaczenia).
+     */
     protected int selectedRow = -1;
 
+    /**
+     * Konstruktor klasy PaneController.
+     * 
+     * @param name        Nazwa panelu
+     * @param columnNames Tablica nazw kolumn tabeli
+     */
     protected PaneController(String name, String[] columnNames) {
         setLayout(new BorderLayout());
         model = new DefaultTableModel(columnNames, 0);
@@ -38,10 +75,21 @@ public abstract class PaneController extends JPanel implements ActionListener {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Metoda dodająca wiersz danych do tabeli.
+     * 
+     * @param rowData Lista obiektów reprezentujących dane w wierszu
+     */
     protected void addFieldToTable(ArrayList<Object> rowData) {
         model.addRow(rowData.toArray());
     }
 
+    /**
+     * Metoda dodająca pole tekstowe do panelu.
+     * 
+     * @param name Nazwa pola
+     * @return Utworzone pole tekstowe
+     */
     protected JTextField addField(String name) {
         JLabel label = new JLabel(name);
         JTextField textField = new JTextField(10);
@@ -51,6 +99,13 @@ public abstract class PaneController extends JPanel implements ActionListener {
         return textField;
     }
 
+    /**
+     * Metoda tworząca przycisk.
+     * 
+     * @param actionCommand Komenda akcji przycisku
+     * @param name          Nazwa przycisku
+     * @return Utworzony przycisk
+     */
     protected JButton createButton(String actionCommand, String name) {
         JButton button = new JButton(name);
         button.setActionCommand(actionCommand);
@@ -58,25 +113,61 @@ public abstract class PaneController extends JPanel implements ActionListener {
         return button;
     }
 
+    /**
+     * Metoda usuwająca wiersz z tabeli.
+     * 
+     * @param row Numer wiersza do usunięcia
+     */
     protected void deleteRow(int row) {
         model.removeRow(row);
     }
 
+    /**
+     * Metoda edytująca wiersz w tabeli.
+     * 
+     * @param rowData Lista obiektów reprezentujących nowe dane w wierszu
+     * @param row     Numer wiersza do edycji
+     */
     protected void editRow(ArrayList<Object> rowData, int row) {
         for (int i = 0; i < rowData.size(); i++) {
             model.setValueAt(rowData.get(i), row, i);
         }
     }
 
+    /**
+     * Metoda abstrakcyjna do pobierania nazwy pola na podstawie jego
+     * identyfikatora.
+     * 
+     * @param id Identyfikator pola
+     * @return Nazwa pola
+     */
     protected abstract String getFieldNameFromID(String id);
 
+    /**
+     * Metoda abstrakcyjna do pobierania nazwy przycisku na podstawie jego
+     * identyfikatora.
+     * 
+     * @param id Identyfikator przycisku
+     * @return Nazwa przycisku
+     */
     protected abstract String getButtonNamesFromID(String id);
 
-    // Public getter methods
+    // Publiczne metody getter
+
+    /**
+     * Metoda zwracająca tabelę.
+     * 
+     * @return Tabela
+     */
     public JTable getTable() {
         return table;
     }
 
+    /**
+     * Metoda zwracająca model danych tabeli.
+     * 
+     * @return Model danych tabeli
+     */
     public DefaultTableModel getModel() {
         return model;
     }
