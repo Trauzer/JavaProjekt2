@@ -27,6 +27,11 @@ public class StudentRegistryTest {
         super();
     }
 
+    /**
+     * Metoda inicjalizująca wykonywana przed każdym testem.
+     * Ustawia początkowy stan rejestru studentów oraz inicjalizuje niezbędne
+     * obiekty.
+     */
     @BeforeEach
     public void setUp() {
         List<String> groupData = new ArrayList<>();
@@ -35,7 +40,6 @@ public class StudentRegistryTest {
         groupRegistry = new GroupRegistry(groupData);
         studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
-
 
     /**
      * Test dodawania studenta do rejestru.

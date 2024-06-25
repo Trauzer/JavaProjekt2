@@ -14,10 +14,18 @@ import java.util.List;
  * Klasa StudentGUI rozszerzająca PaneController, obsługująca interfejs
  * użytkownika związanego z studentami.
  */
-
 public class StudentGUI extends PaneController {
 
+    /**
+     * Metoda zmienna rejestrująca studentów, używane do zarządzania studentami w
+     * interfejsie użytkownika
+     */
     private StudentRegistry studentRegistry; // Rejestr studentów
+
+    /**
+     * Metoda rejestrująca grupy, używane do zarządzania grupami w
+     * interfejsie użytkownika
+     */
     private GroupRegistry groupRegistry; // Rejestr grup
 
     /**
@@ -28,7 +36,6 @@ public class StudentGUI extends PaneController {
      * @param groupRegistry   Rejestr grup
      * @param subjectRegistry Rejestr przedmiotów (nie używany w tej klasie)
      */
-
     public StudentGUI(String name, StudentRegistry studentRegistry, GroupRegistry groupRegistry,
             SubjectRegistry subjectRegistry) {
         super(name, new String[] { "Imię", "Nazwisko", "Numer Albumu", "Grupa" });
@@ -120,7 +127,6 @@ public class StudentGUI extends PaneController {
      *
      * @return Panel GUI
      */
-
     public JPanel getPanel() {
         return this;
     }
@@ -130,7 +136,6 @@ public class StudentGUI extends PaneController {
      *
      * @param e Zdarzenie akcji
      */
-
     @Override
     public void actionPerformed(ActionEvent e) {
         // Obsługa dodawania studenta
@@ -212,7 +217,6 @@ public class StudentGUI extends PaneController {
     /**
      * Metoda odświeżająca tabelę studentów.
      */
-
     public void refreshTable() {
         model.setRowCount(0);
         for (Student student : studentRegistry.getStudents()) {
@@ -231,7 +235,6 @@ public class StudentGUI extends PaneController {
      *
      * @param subjectCode Kod przedmiotu
      */
-
     public void addColumn(String subjectCode) {
         if (!columnExists(subjectCode)) {
             model.addColumn(subjectCode);
@@ -244,7 +247,6 @@ public class StudentGUI extends PaneController {
      * @param subjectCode Kod przedmiotu
      * @return true, jeśli kolumna istnieje; false w przeciwnym razie
      */
-
     public boolean columnExists(String subjectCode) {
         return model.findColumn(subjectCode) != -1;
     }
@@ -256,7 +258,6 @@ public class StudentGUI extends PaneController {
      * @param subjectCode        Kod przedmiotu
      * @param grade              Ocena do aktualizacji
      */
-
     public void updateStudentGrade(String studentAlbumNumber, String subjectCode, int grade) {
         int columnIndex = model.findColumn(subjectCode);
         if (columnIndex == -1) {
@@ -279,7 +280,6 @@ public class StudentGUI extends PaneController {
      *
      * @param albumNumber Numer albumu studenta do wyszukania
      */
-
     public void searchStudent(String albumNumber) {
         Student student = studentRegistry.getStudentByAlbumNumber(albumNumber);
 
