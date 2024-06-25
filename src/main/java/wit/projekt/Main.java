@@ -5,6 +5,8 @@ import wit.projekt.Frame.Frame;
 import wit.projekt.Group.GroupRegistry;
 import wit.projekt.Student.StudentGUI;
 import wit.projekt.Group.GroupGUI;
+import wit.projekt.Group.GroupRegistry;
+import wit.projekt.Student.StudentGUI;
 import wit.projekt.Student.StudentRegistry;
 import wit.projekt.Subject.SubjectGUI;
 import wit.projekt.Subject.SubjectRegistry;
@@ -21,6 +23,7 @@ public class Main {
     // Rejestry dla danych głównych
     static StudentRegistry studentRegistry = new StudentRegistry(database.get("students"));
     static GroupRegistry groupRegistry = new GroupRegistry(database.get("groups"));
+    static StudentRegistry studentRegistry = new StudentRegistry(database.get("students"), groupRegistry);
     static SubjectRegistry subjectRegistry = new SubjectRegistry(database.get("subjects"));
 
     /**
@@ -38,8 +41,12 @@ public class Main {
      * @param args Argumenty wiersza poleceń (nie używane w tej aplikacji).
      */
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Frame frame = new Frame();
 
-        SwingUtilities.invokeLater(new Runnable() {
+            StudentGUI studentGUI = new StudentGUI("STUDENTS", studentRegistry, groupRegistry, subjectRegistry);
+            GroupGUI groupGUI = new GroupGUI("GROUPS", groupRegistry, studentRegistry, studentGUI);
+            SubjectGUI subjectGUI = new SubjectGUI("SUBJECTS", subjectRegistry, studentRegistry, studentGUI);
 
             @Override
             public void run() {
@@ -73,5 +80,6 @@ public class Main {
 
         // Zapisuje plik bazy danych na dysku
         database.saveFile();
+
     }
 }

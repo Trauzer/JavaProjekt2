@@ -19,8 +19,9 @@ public class SubjectRegistry {
      */
     public SubjectRegistry(List<String> data) {
         if (!data.isEmpty()) {
-            for (int i = 0; i < data.size(); i += 2) {
-                subjects.add(new Subject(data.get(i), data.get(i + 1)));
+            for (String line : data) {
+                String[] parts = line.split(";");
+                subjects.add(new Subject(parts[0], parts[1]));
             }
         }
     }
@@ -90,8 +91,10 @@ public class SubjectRegistry {
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Subject subject : subjects) {
-            data.add(subject.getCode());
-            data.add(subject.getName());
+            StringBuilder sb = new StringBuilder();
+            sb.append(subject.getCode()).append(";")
+              .append(subject.getName());
+            data.add(sb.toString());
         }
         Database.save("subjects", data);
     }

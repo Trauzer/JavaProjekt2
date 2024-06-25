@@ -1,15 +1,13 @@
 package wit.projekt.Student;
 
-import wit.projekt.Group.Group;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import wit.projekt.Group.GroupRegistry;
-import wit.projekt.Subject.SubjectRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Ta klasa jest odpowiedzialna za testowanie funkcjonalności rejestru
@@ -20,7 +18,6 @@ import org.junit.jupiter.api.Test;
 public class StudentRegistryTest {
     private StudentRegistry studentRegistry;
     private GroupRegistry groupRegistry;
-    private SubjectRegistry subjectRegistry;
 
     /**
      * Konstruktor klasy StudentRegistryTest.
@@ -35,13 +32,11 @@ public class StudentRegistryTest {
      */
     @BeforeEach
     public void setUp() {
-        List<String> studentData = new ArrayList<>();
         List<String> groupData = new ArrayList<>();
-        List<String> subjectData = new ArrayList<>();
+        List<String> studentData = new ArrayList<>();
 
-        studentRegistry = new StudentRegistry(studentData);
         groupRegistry = new GroupRegistry(groupData);
-        subjectRegistry = new SubjectRegistry(subjectData);
+        studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
 
     /**
@@ -64,10 +59,11 @@ public class StudentRegistryTest {
         Student student = new Student("John", "Doe", "12345");
         studentRegistry.addStudent(student);
 
-        Student editedStudent = new Student("John", "Smith", "12345");
+        Student editedStudent = new Student("John", "Doe", "12345");
+        editedStudent.addGrade("MATH101", 4);
         studentRegistry.editStudent("12345", editedStudent);
 
-        assertEquals("Smith", studentRegistry.getStudentByAlbumNumber("12345").getSurname());
+        assertEquals(4, studentRegistry.getStudentByAlbumNumber("12345").getGrade("MATH101").intValue());
     }
 
     /**

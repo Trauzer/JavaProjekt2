@@ -1,14 +1,13 @@
 package wit.projekt.Group;
 
-import wit.projekt.Student.Student;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import wit.projekt.Student.StudentRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Testy jednostkowe dla klasy GroupRegistry.
@@ -40,7 +39,7 @@ public class GroupRegistryTest {
         List<String> studentData = new ArrayList<>();
 
         groupRegistry = new GroupRegistry(groupData);
-        studentRegistry = new StudentRegistry(studentData);
+        studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
 
     /**
@@ -48,11 +47,11 @@ public class GroupRegistryTest {
      */
     @Test
     public void testAddGroup() {
-        Group group = new Group("G01", "CS", "Computer Science Group");
+        Group group = new Group("CS101", "Computer Science", "CS Group");
         groupRegistry.addGroup(group);
 
         assertEquals(1, groupRegistry.getGroups().size());
-        assertEquals("CS", groupRegistry.getGroupByCode("G01").getSpecialization());
+        assertEquals("Computer Science", groupRegistry.getGroupByCode("CS101").getSpecialization());
     }
 
     /**
@@ -60,13 +59,13 @@ public class GroupRegistryTest {
      */
     @Test
     public void testEditGroup() {
-        Group group = new Group("G01", "CS", "Computer Science Group");
+        Group group = new Group("CS101", "Computer Science", "CS Group");
         groupRegistry.addGroup(group);
 
-        Group editedGroup = new Group("G01", "Math", "Mathematics Group");
-        groupRegistry.editGroup("G01", editedGroup);
+        Group editedGroup = new Group("CS101", "Advanced Computer Science", "Advanced CS Group");
+        groupRegistry.editGroup("CS101", editedGroup);
 
-        assertEquals("Math", groupRegistry.getGroupByCode("G01").getSpecialization());
+        assertEquals("Advanced Computer Science", groupRegistry.getGroupByCode("CS101").getSpecialization());
     }
 
     /**
@@ -74,12 +73,12 @@ public class GroupRegistryTest {
      */
     @Test
     public void testDeleteGroup() {
-        Group group = new Group("G01", "CS", "Computer Science Group");
+        Group group = new Group("CS101", "Computer Science", "CS Group");
         groupRegistry.addGroup(group);
 
-        groupRegistry.deleteGroup("G01");
+        groupRegistry.deleteGroup("CS101");
 
-        assertNull(groupRegistry.getGroupByCode("G01"));
+        assertNull(groupRegistry.getGroupByCode("CS101"));
         assertEquals(0, groupRegistry.getGroups().size());
     }
 

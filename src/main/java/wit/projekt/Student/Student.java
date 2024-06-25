@@ -1,6 +1,8 @@
 package wit.projekt.Student;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import wit.projekt.Group.Group;
 
 /**
@@ -11,6 +13,7 @@ public class Student {
     private String surname; // Nazwisko studenta
     private String albumNumber; // Numer albumu studenta
     private Group group; // Grupa studenta
+    private Map<String, Integer> subjectGrades; // Mapa do trzymania przedmiotów i korespondujących z nim oceń
 
     /**
      * Konstruktor klasy Student.
@@ -24,6 +27,8 @@ public class Student {
         this.surname = surname;
         this.albumNumber = albumNumber;
         this.group = null; // Domyślnie student nie należy do żadnej grupy
+        this.group = null;
+        this.subjectGrades = new HashMap<>();
     }
 
     /**
@@ -114,6 +119,18 @@ public class Student {
      * 
      * @return Lista pól obiektu studenta
      */
+    public void addGrade(String subjectCode, int grade) {
+        subjectGrades.put(subjectCode, grade);
+    }
+
+    public Integer getGrade(String subjectCode) {
+        return subjectGrades.get(subjectCode);
+    }
+
+    public Map<String, Integer> getAllGrades() {
+        return subjectGrades;
+    }
+
     public ArrayList<Object> getFields() {
         ArrayList<Object> fields = new ArrayList<>();
         fields.add(name);

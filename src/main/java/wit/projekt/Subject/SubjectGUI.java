@@ -54,7 +54,7 @@ public class SubjectGUI extends PaneController {
         fields.put("code", new JTextField(10));
         fields.put("name", new JTextField(10));
         fields.put("studentAlbumNumber", new JTextField(10));
-        fields.put("grade", new JTextField(10));
+        fields.put("points", new JTextField(10));
 
         // Ustawienie layoutu dla panelu pól i przycisków
         fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
@@ -62,8 +62,8 @@ public class SubjectGUI extends PaneController {
         // Dodanie etykiet i pól tekstowych do panelu pól
         fieldPanel.add(new JLabel("Numer albumu studenta:"));
         fieldPanel.add(fields.get("studentAlbumNumber"));
-        fieldPanel.add(new JLabel("Ocena:"));
-        fieldPanel.add(fields.get("grade"));
+        fieldPanel.add(new JLabel("Liczba punktów:"));
+        fieldPanel.add(fields.get("points"));
 
         // Ustawienie layoutu dla panelu przycisków
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -81,8 +81,8 @@ public class SubjectGUI extends PaneController {
         JButton deleteButton = createButton("deleteButton", "Usuń przedmiot");
         buttonPanel.add(deleteButton);
 
-        JButton addGradeButton = createButton("addGradeButton", "Dodaj ocenę");
-        fieldPanel.add(addGradeButton);
+        JButton addPointsButton = createButton("addPointsButton", "Dodaj punkty");
+        fieldPanel.add(addPointsButton);
 
         JButton editButton = createButton("editButton", "Edytuj przedmiot");
         buttonPanel.add(editButton);
@@ -112,8 +112,8 @@ public class SubjectGUI extends PaneController {
                 return "Usuń przedmiot";
             case "searchButton":
                 return "Szukaj przedmiotu";
-            case "addGradeButton":
-                return "Dodaj ocenę";
+            case "addPointsButton":
+                return "Dodaj punkty";
             default:
                 return "";
         }
@@ -169,23 +169,24 @@ public class SubjectGUI extends PaneController {
 
         if (e.getActionCommand().equals("addGradeButton")) {
             // Dodanie oceny dla studenta
-            String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
-            String gradeStr = fields.get("grade").getText();
 
-            if (studentAlbumNumber.isEmpty() || gradeStr.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Numer albumu studenta i ocena muszą być wypełnione");
+            String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
+            String pointsStr = fields.get("points").getText();
+
+            if (studentAlbumNumber.isEmpty() || pointsStr.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Numer albumu studenta i liczba punktów muszą być wypełnione");
                 return;
             }
 
-            int grade;
+            int points;
             try {
-                grade = Integer.parseInt(gradeStr);
-                if (grade < 1 || grade > 5) {
-                    JOptionPane.showMessageDialog(null, "Ocena musi być liczbą z zakresu 1-5");
+                points = Integer.parseInt(pointsStr);
+                if (points < 0 || points > 100) {
+                    JOptionPane.showMessageDialog(null, "Liczba punktów musi być liczbą z zakresu 0-100");
                     return;
                 }
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Ocena musi być liczbą");
+                JOptionPane.showMessageDialog(null, "Liczba punktów musi być liczbą");
                 return;
             }
 
@@ -196,7 +197,7 @@ public class SubjectGUI extends PaneController {
             }
 
             if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(null, "Nie wybrano przedmiotu do przypisania oceny");
+                JOptionPane.showMessageDialog(null, "Nie wybrano przedmiotu do przypisania punktów");
                 return;
             }
 
@@ -207,9 +208,11 @@ public class SubjectGUI extends PaneController {
                 studentGUI.addColumn(subjectCode);
             }
 
+            int grade = calculateGrade(points);
+
             studentGUI.updateStudentGrade(studentAlbumNumber, subjectCode, grade);
 
-            JOptionPane.showMessageDialog(null, "Ocena została dodana pomyślnie");
+            JOptionPane.showMessageDialog(null, "Punkty zostały dodane pomyślnie, ocena: " + grade);
         }
 
         if (e.getActionCommand().equals("editButton")) {
@@ -243,6 +246,19 @@ public class SubjectGUI extends PaneController {
             } else {
                 JOptionPane.showMessageDialog(null, "Wprowadź nazwę przedmiotu do wyszukania.");
             }
+        }
+    }
+
+
+    private int calculateGrade(int points) {
+        if (points > 90) {
+            return 5;
+        } else if (points > 70) {
+            return 4;
+        } else if (points > 50) {
+            return 3;
+        } else {
+            return 2;
         }
     }
 

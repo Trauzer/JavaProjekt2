@@ -1,16 +1,14 @@
 package wit.projekt.Subject;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import wit.projekt.Group.GroupRegistry;
-import wit.projekt.Student.Student;
-import wit.projekt.Student.StudentGUI;
 import wit.projekt.Student.StudentRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Testy jednostkowe dla klasy SubjectRegistry.
@@ -21,6 +19,7 @@ public class SubjectRegistryTest {
 
     private SubjectRegistry subjectRegistry;
     private StudentRegistry studentRegistry;
+    private GroupRegistry groupRegistry;
 
     /**
      * Konstruktor domyślny dla klasy testowej SubjectRegistryTest.
@@ -37,9 +36,11 @@ public class SubjectRegistryTest {
     public void setUp() {
         List<String> subjectData = new ArrayList<>();
         List<String> studentData = new ArrayList<>();
+        List<String> groupData = new ArrayList<>();
 
+        groupRegistry = new GroupRegistry(groupData);
         subjectRegistry = new SubjectRegistry(subjectData);
-        studentRegistry = new StudentRegistry(studentData);
+        studentRegistry = new StudentRegistry(studentData, groupRegistry);
     }
 
     /**

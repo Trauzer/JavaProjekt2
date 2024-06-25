@@ -51,6 +51,12 @@ public class StudentGUI extends PaneController {
         // Dodanie pól do tabeli na podstawie istniejących studentów
         for (Student student : studentRegistry.getStudents()) {
             addFieldToTable(student.getFields());
+            for (Subject subject : subjects) {
+                Integer grade = student.getGrade(subject.getCode());
+                if (grade != null) {
+                    model.setValueAt(grade, model.getRowCount() - 1, model.findColumn(subject.getCode()));
+                }
+            }
         }
 
         // Inicjalizacja pól tekstowych
@@ -214,6 +220,12 @@ public class StudentGUI extends PaneController {
         model.setRowCount(0);
         for (Student student : studentRegistry.getStudents()) {
             addFieldToTable(student.getFields());
+            for (String subjectCode : student.getAllGrades().keySet()) {
+                Integer grade = student.getGrade(subjectCode);
+                if (grade != null) {
+                    model.setValueAt(grade, model.getRowCount() - 1, model.findColumn(subjectCode));
+                }
+            }
         }
     }
 
@@ -254,6 +266,7 @@ public class StudentGUI extends PaneController {
         for (int i = 0; i < model.getRowCount(); i++) {
             if (model.getValueAt(i, 2).equals(studentAlbumNumber)) {
                 model.setValueAt(grade, i, columnIndex);
+                studentRegistry.getStudentByAlbumNumber(studentAlbumNumber).addGrade(subjectCode, grade);
                 break;
             }
         }

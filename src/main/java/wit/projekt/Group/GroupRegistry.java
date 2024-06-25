@@ -18,14 +18,12 @@ public class GroupRegistry {
      * @param data Lista danych w formacie: [kod grupy, specjalizacja, opis, ...]
      */
     public GroupRegistry(List<String> data) {
-        if (data.size() > 0) {
-            for (int i = 0; i < data.size(); i += 3) {
-                groups.add(new Group(data.get(i), data.get(i + 1), data.get(i + 2)));
+        if (!data.isEmpty()) {
+            for (String line : data) {
+                String[] parts = line.split(";");
+                groups.add(new Group(parts[0], parts[1], parts[2]));
             }
         }
-        // Przykładowe dodanie grup na potrzeby testowania
-        // groups.add(new Group("G01", "Computer Science", "CS Group"));
-        // groups.add(new Group("G02", "Mathematics", "Math Group"));
     }
 
     /**
@@ -95,9 +93,11 @@ public class GroupRegistry {
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();
         for (Group group : groups) {
-            data.add(group.getGroupCode());
-            data.add(group.getSpecialization());
-            data.add(group.getDescription());
+            StringBuilder sb = new StringBuilder();
+            sb.append(group.getGroupCode()).append(";")
+              .append(group.getSpecialization()).append(";")
+              .append(group.getDescription());
+            data.add(sb.toString());
         }
         Database.save("groups", data);
     }
