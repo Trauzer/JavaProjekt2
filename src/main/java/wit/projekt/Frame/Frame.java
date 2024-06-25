@@ -7,8 +7,16 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
 
+/**
+ * Klasa Frame reprezentuje główne okno aplikacji z zakładkami.
+ */
+
 public class Frame extends JFrame {
     private JTabbedPane tabbedPane = new JTabbedPane();
+
+    /**
+     * Konstruktor klasy Frame.
+     */
 
     public Frame() {
         setTitle("Dziennik elektroniczny");
@@ -28,6 +36,13 @@ public class Frame extends JFrame {
 
         add(tabbedPane, BorderLayout.CENTER);
     }
+
+    /**
+     * Metoda dodająca panel do zakładek w oknie.
+     * 
+     * @param name  Nazwa zakładki
+     * @param panel Panel do dodania
+     */
 
     public void addPanelToPane(String name, JPanel panel) {
         tabbedPane.addTab(name, panel);

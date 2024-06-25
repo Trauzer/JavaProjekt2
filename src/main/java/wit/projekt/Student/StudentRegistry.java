@@ -7,30 +7,63 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa StudentRegistry przechowująca rejestr studentów oraz umożliwiająca
+ * operacje na nich.
+ */
+
 public class StudentRegistry {
-    private List<Student> students;
+    private List<Student> students; // Lista studentów
+
+    /**
+     * Konstruktor klasy StudentRegistry.
+     *
+     * @param data Lista danych inicjalizacyjnych (imię, nazwisko, numer albumu)
+     */
 
     public StudentRegistry(List<String> data) {
         students = new ArrayList<>();
-        
+
+        // Inicjalizacja listy studentów na podstawie danych
         if (!data.isEmpty()) {
             for (int i = 0; i < data.size(); i += 4) {
                 Student student = new Student(data.get(i), data.get(i + 1), data.get(i + 2));
                 students.add(student);
             }
         }
-        //students.add(new Student("Jan", "Kowalski", "123456"));
-        //students.add(new Student("Adam", "Nowak", "654321"));
+        // Przykładowe dodanie studentów (zakomentowane)
+        // students.add(new Student("Jan", "Kowalski", "123456"));
+        // students.add(new Student("Adam", "Nowak", "654321"));
     }
+
+    /**
+     * Metoda zwracająca listę wszystkich studentów.
+     *
+     * @return Lista studentów
+     */
 
     public List<Student> getStudents() {
         return students;
     }
 
+    /**
+     * Metoda dodająca nowego studenta do rejestru.
+     *
+     * @param student Obiekt studenta do dodania
+     */
+
     public void addStudent(Student student) {
         students.add(student);
         JOptionPane.showMessageDialog(null, "Dodano studenta: " + student.getName() + " " + student.getSurname());
     }
+
+    /**
+     * Metoda edytująca dane studenta na podstawie numeru albumu.
+     *
+     * @param albumNumber Numer albumu studenta do edycji
+     * @param newStudent  Nowy obiekt studenta z zaktualizowanymi danymi
+     * @return Zaktualizowany obiekt studenta lub null, jeśli nie znaleziono
+     */
 
     public Student editStudent(String albumNumber, Student newStudent) {
         for (Student student : students) {
@@ -47,9 +80,22 @@ public class StudentRegistry {
         return null;
     }
 
+    /**
+     * Metoda usuwająca studenta na podstawie numeru albumu.
+     *
+     * @param albumNumber Numer albumu studenta do usunięcia
+     */
+
     public void deleteStudent(String albumNumber) {
         students.removeIf(student -> student.getAlbumNumber().equals(albumNumber));
     }
+
+    /**
+     * Metoda zwracająca studenta na podstawie numeru albumu.
+     *
+     * @param albumNumber Numer albumu studenta do wyszukania
+     * @return Obiekt studenta lub null, jeśli nie znaleziono
+     */
 
     public Student getStudentByAlbumNumber(String albumNumber) {
         for (Student student : students) {
@@ -59,6 +105,13 @@ public class StudentRegistry {
         }
         return null;
     }
+
+    /**
+     * Metoda przypisująca grupę do studenta.
+     *
+     * @param student Student, któremu ma być przypisana grupa
+     * @param group   Grupa do przypisania
+     */
 
     public void assignGroupToStudent(Student student, Group group) {
         System.out.println("Assigning group " + (group != null ? group.getGroupCode() : "null") + " to student "
@@ -77,6 +130,10 @@ public class StudentRegistry {
             System.out.println(s.getFields());
         }
     }
+
+    /**
+     * Metoda zapisująca dane studentów do bazy danych.
+     */
 
     public void saveDataToDB() {
         List<String> data = new ArrayList<>();

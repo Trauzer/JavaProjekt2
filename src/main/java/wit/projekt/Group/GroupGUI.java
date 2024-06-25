@@ -8,27 +8,45 @@ import wit.projekt.Student.StudentGUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Klasa GUI do obsługi grup.
+ * Rozszerza PaneController i zawiera interakcje użytkownika z interfejsem
+ * użytkownika.
+ */
+
 public class GroupGUI extends PaneController {
 
-    private GroupRegistry groupRegistry;
-    private StudentRegistry studentRegistry;
-    private StudentGUI studentGUI;
+    private GroupRegistry groupRegistry; // Rejestr grup
+    private StudentRegistry studentRegistry; // Rejestr studentów
+    private StudentGUI studentGUI; // GUI dla studentów
+
+    /**
+     * Konstruktor klasy GroupGUI.
+     * 
+     * @param name            Nazwa panelu
+     * @param groupRegistry   Rejestr grup
+     * @param studentRegistry Rejestr studentów
+     * @param studentGUI      Interfejs GUI studenta
+     */
 
     public GroupGUI(String name, GroupRegistry groupRegistry, StudentRegistry studentRegistry, StudentGUI studentGUI) {
-        super(name, new String[]{"Kod Grupy", "Specjalizacja", "Opis"});
+        super(name, new String[] { "Kod Grupy", "Specjalizacja", "Opis" });
         this.groupRegistry = groupRegistry;
         this.studentRegistry = studentRegistry;
         this.studentGUI = studentGUI;
 
+        // Dodawanie pól do tabeli na podstawie istniejących grup
         for (Group group : groupRegistry.getGroups()) {
             addFieldToTable(group.getFields());
         }
 
+        // Inicjalizacja pól formularza
         fields.put("groupCode", new JTextField(10));
         fields.put("specialization", new JTextField(10));
         fields.put("description", new JTextField(10));
         fields.put("studentAlbumNumber", addField("Numer albumu studenta"));
 
+        // Dodawanie etykiet i pól tekstowych do panelu przycisków
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 
         buttonPanel.add(new JLabel("Kod grupy:"));
@@ -38,6 +56,7 @@ public class GroupGUI extends PaneController {
         buttonPanel.add(new JLabel("Opis:"));
         buttonPanel.add(fields.get("description"));
 
+        // Tworzenie przycisków i dodawanie ich do panelu
         JButton assignButton = createButton("assignButton", "Przypisz studenta");
         fieldPanel.add(assignButton);
 
@@ -88,6 +107,12 @@ public class GroupGUI extends PaneController {
                 return "";
         }
     }
+
+    /**
+     * Metoda zwracająca panel GUI.
+     * 
+     * @return Panel GUI
+     */
 
     public JPanel getPanel() {
         return this;
@@ -141,7 +166,8 @@ public class GroupGUI extends PaneController {
             if (group != null && student != null) {
                 group.addStudent(student);
                 studentRegistry.assignGroupToStudent(student, group);
-                JOptionPane.showMessageDialog(null, "Przypisano studenta: " + student.getName() + " " + student.getSurname() + " do grupy " + group.getGroupCode());
+                JOptionPane.showMessageDialog(null, "Przypisano studenta: " + student.getName() + " "
+                        + student.getSurname() + " do grupy " + group.getGroupCode());
                 studentGUI.refreshTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Nie znaleziono grupy lub studenta");
@@ -168,7 +194,8 @@ public class GroupGUI extends PaneController {
             if (group != null && student != null) {
                 group.removeStudent(student);
                 studentRegistry.assignGroupToStudent(student, null);
-                JOptionPane.showMessageDialog(null, "Usunięto przypisanie studenta: " + student.getName() + " " + student.getSurname() + " z grupy " + group.getGroupCode());
+                JOptionPane.showMessageDialog(null, "Usunięto przypisanie studenta: " + student.getName() + " "
+                        + student.getSurname() + " z grupy " + group.getGroupCode());
                 studentGUI.refreshTable();
             } else {
                 JOptionPane.showMessageDialog(null, "Nie znaleziono grupy lub studenta");
@@ -208,6 +235,13 @@ public class GroupGUI extends PaneController {
         }
 
     }
+
+    /**
+     * Metoda wyszukująca i wyświetlająca informacje o grupie na podstawie kodu
+     * grupy.
+     * 
+     * @param groupCode Kod grupy do wyszukania
+     */
 
     private void searchGroup(String groupCode) {
         Group group = groupRegistry.getGroupByCode(groupCode);
