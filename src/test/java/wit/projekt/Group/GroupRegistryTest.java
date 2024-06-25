@@ -10,10 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Testy jednostkowe dla klasy GroupRegistry.
+ */
+
 public class GroupRegistryTest {
 
     private GroupRegistry groupRegistry;
     private StudentRegistry studentRegistry;
+
+    /**
+     * Przygotowanie danych przed każdym testem.
+     */
 
     @BeforeEach
     public void setUp() {
@@ -24,6 +32,10 @@ public class GroupRegistryTest {
         studentRegistry = new StudentRegistry(studentData);
     }
 
+    /**
+     * Test dodawania grupy do rejestru.
+     */
+
     @Test
     public void testAddGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -32,6 +44,10 @@ public class GroupRegistryTest {
         assertEquals(1, groupRegistry.getGroups().size());
         assertEquals("CS", groupRegistry.getGroupByCode("G01").getSpecialization());
     }
+
+    /**
+     * Test edycji grupy w rejestrze.
+     */
 
     @Test
     public void testEditGroup() {
@@ -44,6 +60,10 @@ public class GroupRegistryTest {
         assertEquals("Math", groupRegistry.getGroupByCode("G01").getSpecialization());
     }
 
+    /**
+     * Test usuwania grupy z rejestru.
+     */
+
     @Test
     public void testDeleteGroup() {
         Group group = new Group("G01", "CS", "Computer Science Group");
@@ -54,6 +74,10 @@ public class GroupRegistryTest {
         assertNull(groupRegistry.getGroupByCode("G01"));
         assertEquals(0, groupRegistry.getGroups().size());
     }
+
+    /**
+     * Test przypisywania studenta do grupy.
+     */
 
     @Test
     public void testAssignStudentToGroup() {
@@ -68,6 +92,10 @@ public class GroupRegistryTest {
         assertEquals("G01", student.getGroupCode());
         assertEquals(1, group.getStudents().size());
     }
+
+    /**
+     * Test odłączania studenta od grupy.
+     */
 
     @Test
     public void testUnassignStudentFromGroup() {

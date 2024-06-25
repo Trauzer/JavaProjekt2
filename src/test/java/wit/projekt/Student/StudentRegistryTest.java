@@ -11,22 +11,34 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Testy jednostkowe dla klasy StudentRegistry.
+ */
+
 public class StudentRegistryTest {
 
     private StudentRegistry studentRegistry;
     private GroupRegistry groupRegistry;
     private SubjectRegistry subjectRegistry;
 
+    /**
+     * Przygotowanie danych przed każdym testem.
+     */
+
     @BeforeEach
     public void setUp() {
         List<String> studentData = new ArrayList<>();
         List<String> groupData = new ArrayList<>();
         List<String> subjectData = new ArrayList<>();
-        
+
         studentRegistry = new StudentRegistry(studentData);
         groupRegistry = new GroupRegistry(groupData);
         subjectRegistry = new SubjectRegistry(subjectData);
     }
+
+    /**
+     * Test dodawania studenta do rejestru.
+     */
 
     @Test
     public void testAddStudent() {
@@ -36,6 +48,10 @@ public class StudentRegistryTest {
         assertEquals(1, studentRegistry.getStudents().size());
         assertEquals("John", studentRegistry.getStudentByAlbumNumber("12345").getName());
     }
+
+    /**
+     * Test edycji studenta w rejestrze.
+     */
 
     @Test
     public void testEditStudent() {
@@ -48,6 +64,10 @@ public class StudentRegistryTest {
         assertEquals("Smith", studentRegistry.getStudentByAlbumNumber("12345").getSurname());
     }
 
+    /**
+     * Test usuwania studenta z rejestru.
+     */
+
     @Test
     public void testDeleteStudent() {
         Student student = new Student("John", "Doe", "12345");
@@ -58,6 +78,10 @@ public class StudentRegistryTest {
         assertNull(studentRegistry.getStudentByAlbumNumber("12345"));
         assertEquals(0, studentRegistry.getStudents().size());
     }
+
+    /**
+     * Test przypisywania grupy do studenta.
+     */
 
     @Test
     public void testAssignGroupToStudent() {

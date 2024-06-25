@@ -12,19 +12,31 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Testy jednostkowe dla klasy SubjectRegistry.
+ */
+
 public class SubjectRegistryTest {
 
     private SubjectRegistry subjectRegistry;
     private StudentRegistry studentRegistry;
 
+    /**
+     * Przygotowanie danych przed każdym testem.
+     */
+
     @BeforeEach
     public void setUp() {
         List<String> subjectData = new ArrayList<>();
         List<String> studentData = new ArrayList<>();
-        
+
         subjectRegistry = new SubjectRegistry(subjectData);
         studentRegistry = new StudentRegistry(studentData);
     }
+
+    /**
+     * Test dodawania przedmiotu do rejestru.
+     */
 
     @Test
     public void testAddSubject() {
@@ -34,6 +46,10 @@ public class SubjectRegistryTest {
         assertEquals(1, subjectRegistry.getSubjects().size());
         assertEquals("Mathematics", subjectRegistry.getSubjectByCode("MATH101").getName());
     }
+
+    /**
+     * Test edycji przedmiotu w rejestrze.
+     */
 
     @Test
     public void testEditSubject() {
@@ -46,6 +62,10 @@ public class SubjectRegistryTest {
         assertEquals("Advanced Mathematics", subjectRegistry.getSubjectByCode("MATH101").getName());
     }
 
+    /**
+     * Test usuwania przedmiotu z rejestracji.
+     */
+
     @Test
     public void testDeleteSubject() {
         Subject subject = new Subject("MATH101", "Mathematics");
@@ -57,6 +77,10 @@ public class SubjectRegistryTest {
         assertEquals(0, subjectRegistry.getSubjects().size());
     }
 
+    /**
+     * Test dodawania oceny dla studenta.
+     */
+
     @Test
     public void testAddGradeToStudent() {
         Student student = new Student("John", "Doe", "12345");
@@ -65,7 +89,8 @@ public class SubjectRegistryTest {
         Subject subject = new Subject("MATH101", "Mathematics");
         subjectRegistry.addSubject(subject);
 
-        StudentGUI studentGUI = new StudentGUI("STUDENTS", studentRegistry, new GroupRegistry(new ArrayList<>()), subjectRegistry);
+        StudentGUI studentGUI = new StudentGUI("STUDENTS", studentRegistry, new GroupRegistry(new ArrayList<>()),
+                subjectRegistry);
         studentGUI.addColumn("MATH101");
 
         studentGUI.updateStudentGrade("12345", "MATH101", 5);
