@@ -1,6 +1,8 @@
 package wit.projekt.Database;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
 
@@ -47,8 +49,10 @@ public class Database {
      * Metoda wczytująca dane z plików do odpowiednich tabel.
      */
     private void loadFile() {
+        String currentDirectory = System.getProperty("user.dir");
+
         for (String tableName : tables.keySet()) {
-            String path = "src/main/resources/" + tableName + ".txt";
+            String path = currentDirectory + "/" + tableName + ".txt";
 
             if (Files.notExists(Paths.get(path))) {
                 System.out.println("File not found: " + path);
@@ -72,23 +76,25 @@ public class Database {
      */
 
     public void saveFile() {
-        for (String tableName : tables.keySet()) {
-            String path = "src/main/resources/" + tableName + ".txt";
+        String currentDirectory = System.getProperty("user.dir");
 
-            if (Files.notExists(Paths.get(path))) {
-                try {
-                    System.out.println("Creating file: " + path);
-                    Files.createFile(Paths.get(path));
+        for (String tableName : tables.keySet()) {
+            try {
+                File file = new File(currentDirectory, tableName + ".txt");
+
+                if (!file.exists()) {
+                    System.out.println("Creating file: " + file.getPath());
+                    file.createNewFile();
+                }
+
+                try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
+                    List<String> data = tables.get(tableName);
+                    dos.writeInt(data.size());
+                    for (String line : data) {
+                        dos.writeUTF(line);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-            }
-
-            try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(path))) {
-                List<String> data = tables.get(tableName);
-                dos.writeInt(data.size());
-                for (String line : data) {
-                    dos.writeUTF(line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
