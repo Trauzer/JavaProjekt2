@@ -165,7 +165,7 @@ public class SubjectGUI extends PaneController {
             // Usunięcie kolumny z tabeli studentów
         }
 
-        if (e.getActionCommand().equals("addPointsButton")) {s
+        if (e.getActionCommand().equals("addPointsButton")) {
             // Dodanie punktów do przedmiotu
             String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
             String pointsStr = fields.get("points").getText();
@@ -246,7 +246,6 @@ public class SubjectGUI extends PaneController {
         }
     }
 
-<<<<<<< HEAD
     private int calculateGrade(int points) {
         if (points > 90) {
             return 5;
@@ -258,13 +257,12 @@ public class SubjectGUI extends PaneController {
             return 2;
         }
     }
-=======
+
     /**
      * Metoda wyszukująca przedmiot po kodzie.
      *
      * @param code Kod przedmiotu do wyszukania
      */
->>>>>>> 4f0d748 (Dodanie komentarzy do klas, metod i zmiennych składowych.)
 
     public void searchSubject(String code) {
         Subject subject = subjectRegistry.getSubjectByCode(code);
