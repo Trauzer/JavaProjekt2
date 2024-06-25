@@ -8,12 +8,13 @@ import wit.projekt.Group.Group;
 /**
  * Klasa reprezentująca studenta.
  */
+
 public class Student {
     private String name; // Imię studenta
     private String surname; // Nazwisko studenta
     private String albumNumber; // Numer albumu studenta
     private Group group; // Grupa studenta
-    private Map<String, Integer> subjectGrades; // Mapa do trzymania przedmiotów i korespondujących z nim oceń
+    private Map<String, Integer> subjectGrades; // Mapa ocen studenta z korespondującymi kodami przedmiotów
 
     /**
      * Konstruktor klasy Student.
@@ -22,12 +23,12 @@ public class Student {
      * @param surname     Nazwisko studenta
      * @param albumNumber Numer albumu studenta
      */
+
     public Student(String name, String surname, String albumNumber) {
         this.name = name;
         this.surname = surname;
         this.albumNumber = albumNumber;
         this.group = null; // Domyślnie student nie należy do żadnej grupy
-        this.group = null;
         this.subjectGrades = new HashMap<>();
     }
 
@@ -36,6 +37,7 @@ public class Student {
      *
      * @return Imię studenta
      */
+
     public String getName() {
         return name;
     }
@@ -45,6 +47,7 @@ public class Student {
      *
      * @param name Nowe imię studenta
      */
+
     public void setName(String name) {
         this.name = name;
     }
@@ -54,6 +57,7 @@ public class Student {
      *
      * @return Nazwisko studenta
      */
+
     public String getSurname() {
         return surname;
     }
@@ -63,15 +67,17 @@ public class Student {
      *
      * @param surname Nowe nazwisko studenta
      */
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
     /**
-     * Metoda ustawiająca numer albumu studenta.
+     * Metoda zwracająca numer albumu studenta.
      *
-     * @param albumNumber Nowy numer albumu studenta
+     * @return Numer albumu studenta
      */
+
     public void setAlbumNumber(String albumNumber) {
         this.albumNumber = albumNumber;
     }
@@ -81,6 +87,7 @@ public class Student {
      *
      * @return Numer albumu studenta
      */
+
     public String getAlbumNumber() {
         return albumNumber;
     }
@@ -90,6 +97,7 @@ public class Student {
      *
      * @return Grupa studenta
      */
+
     public Group getGroup() {
         return group;
     }
@@ -99,6 +107,7 @@ public class Student {
      * 
      * @param group Nowa grupa studenta
      */
+
     public void setGroup(Group group) {
         this.group = group;
     }
@@ -109,16 +118,11 @@ public class Student {
      * 
      * @return Kod grupy lub "Brak grupy"
      */
+
     public String getGroupCode() {
         return group != null ? group.getGroupCode() : "Brak grupy";
     }
 
-    /**
-     * Metoda zwracająca listę pól obiektu studenta (imię, nazwisko, numer albumu,
-     * kod grupy).
-     * 
-     * @return Lista pól obiektu studenta
-     */
     public void addGrade(String subjectCode, int grade) {
         subjectGrades.put(subjectCode, grade);
     }
@@ -130,6 +134,12 @@ public class Student {
     public Map<String, Integer> getAllGrades() {
         return subjectGrades;
     }
+    /**
+     * Metoda zwracająca listę pól obiektu studenta (imię, nazwisko, numer albumu,
+     * kod grupy).
+     * 
+     * @return Lista pól obiektu studenta
+     */
 
     public ArrayList<Object> getFields() {
         ArrayList<Object> fields = new ArrayList<>();

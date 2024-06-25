@@ -13,21 +13,16 @@ import java.awt.event.ActionEvent;
  * przedmiotami.
  * Rozszerza PaneController.
  */
+
 public class SubjectGUI extends PaneController {
 
-    /**
-     * Klasa prywatna reprezentująca interfejs rejestr przedmiotów
-     */
+    // Rejestr przedmiotów
     private SubjectRegistry subjectRegistry;
 
-    /**
-     * Klasa prywatna reprezentująca interfejs graficzny studenta
-     */
+    // Interfejs graficzny studenta
     private StudentGUI studentGUI;
 
-    /**
-     * Klasa prywatna reprezentująca interfejs rejestr studentów
-     */
+    // Rejestr studentów
     private StudentRegistry studentRegistry;
 
     /**
@@ -38,6 +33,7 @@ public class SubjectGUI extends PaneController {
      * @param studentRegistry Rejestr studentów
      * @param studentGUI      Interfejs graficzny studenta
      */
+
     public SubjectGUI(String name, SubjectRegistry subjectRegistry, StudentRegistry studentRegistry,
             StudentGUI studentGUI) {
         super(name, new String[] { "Kod przedmiotu", "Nazwa przedmiotu" });
@@ -124,6 +120,7 @@ public class SubjectGUI extends PaneController {
      *
      * @return Panel GUI
      */
+
     public JPanel getPanel() {
         return this;
     }
@@ -133,6 +130,7 @@ public class SubjectGUI extends PaneController {
      *
      * @param e Zdarzenie akcji
      */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("addButton")) {
@@ -167,8 +165,8 @@ public class SubjectGUI extends PaneController {
             // Usunięcie kolumny z tabeli studentów
         }
 
-        if (e.getActionCommand().equals("addPointsButton")) {
-            // Dodanie oceny dla studenta
+        if (e.getActionCommand().equals("addPointsButton")) {s
+            // Dodanie punktów do przedmiotu
             String studentAlbumNumber = fields.get("studentAlbumNumber").getText();
             String pointsStr = fields.get("points").getText();
 
@@ -248,6 +246,7 @@ public class SubjectGUI extends PaneController {
         }
     }
 
+<<<<<<< HEAD
     private int calculateGrade(int points) {
         if (points > 90) {
             return 5;
@@ -259,24 +258,14 @@ public class SubjectGUI extends PaneController {
             return 2;
         }
     }
-
-    private int calculateGrade(int points) {
-        if (points > 90) {
-            return 5;
-        } else if (points > 70) {
-            return 4;
-        } else if (points > 50) {
-            return 3;
-        } else {
-            return 2;
-        }
-    }
-
+=======
     /**
      * Metoda wyszukująca przedmiot po kodzie.
      *
      * @param code Kod przedmiotu do wyszukania
      */
+>>>>>>> 4f0d748 (Dodanie komentarzy do klas, metod i zmiennych składowych.)
+
     public void searchSubject(String code) {
         Subject subject = subjectRegistry.getSubjectByCode(code);
         if (subject != null) {

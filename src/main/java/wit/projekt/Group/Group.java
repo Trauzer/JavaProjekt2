@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Klasa reprezentująca grupę.
  */
+
 public class Group {
     private String groupCode; // Kod grupy
     private String specialization; // Specjalizacja grupy
@@ -21,6 +22,7 @@ public class Group {
      * @param specialization Specjalizacja grupy
      * @param description    Opis grupy
      */
+
     public Group(String groupCode, String specialization, String description) {
         this.groupCode = groupCode;
         this.specialization = specialization;
@@ -33,6 +35,7 @@ public class Group {
      * 
      * @return Kod grupy
      */
+
     public String getGroupCode() {
         return groupCode;
     }
@@ -42,6 +45,7 @@ public class Group {
      * 
      * @param groupCode Nowy kod grupy
      */
+
     public void setGroupCode(String groupCode) {
         this.groupCode = groupCode;
     }
@@ -51,6 +55,7 @@ public class Group {
      * 
      * @return Specjalizacja grupy
      */
+
     public String getSpecialization() {
         return specialization;
     }
@@ -60,6 +65,7 @@ public class Group {
      * 
      * @param specialization Nowa specjalizacja grupy
      */
+
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
@@ -69,6 +75,7 @@ public class Group {
      * 
      * @return Opis grupy
      */
+
     public String getDescription() {
         return description;
     }
@@ -78,6 +85,7 @@ public class Group {
      * 
      * @param description Nowy opis grupy
      */
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -87,6 +95,7 @@ public class Group {
      * 
      * @return Lista studentów w grupie
      */
+
     public List<Student> getStudents() {
         return students;
     }
@@ -97,6 +106,7 @@ public class Group {
      * 
      * @param student Student do dodania
      */
+
     public void addStudent(Student student) {
         if (!students.contains(student)) {
             students.add(student);
@@ -110,6 +120,7 @@ public class Group {
      * 
      * @param student Student do usunięcia
      */
+
     public void removeStudent(Student student) {
         if (students.contains(student)) {
             students.remove(student);
@@ -122,6 +133,7 @@ public class Group {
      * 
      * @return Lista pól grupy
      */
+
     public ArrayList<Object> getFields() {
         ArrayList<Object> fields = new ArrayList<>();
         fields.add(groupCode);

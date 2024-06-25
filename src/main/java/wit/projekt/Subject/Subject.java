@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Klasa Subject reprezentująca przedmiot.
  */
+
 public class Subject {
     private String code;
     private String name;
@@ -15,6 +16,7 @@ public class Subject {
      * @param code Kod przedmiotu
      * @param name Nazwa przedmiotu
      */
+
     public Subject(String code, String name) {
         this.code = code;
         this.name = name;
@@ -25,6 +27,7 @@ public class Subject {
      *
      * @return Kod przedmiotu
      */
+
     public String getCode() {
         return code;
     }
@@ -34,6 +37,7 @@ public class Subject {
      *
      * @param code Nowy kod przedmiotu
      */
+
     public void setCode(String code) {
         this.code = code;
     }
@@ -43,15 +47,17 @@ public class Subject {
      *
      * @return Nazwa przedmiotu
      */
+
     public String getName() {
         return name;
     }
 
     /**
-     * Zwraca nazwę przedmiotu
-     * 
-     * @param name Metoda zwracająca nazwę przedmiotu.
+     * Metoda zwracająca nazwę przedmiotu.
+     *
+     * @return Nazwa przedmiotu
      */
+
     public void setName(String name) {
         this.name = name;
     }
@@ -61,6 +67,7 @@ public class Subject {
      *
      * @return Lista pól obiektu
      */
+
     public ArrayList<Object> getFields() {
         ArrayList<Object> fields = new ArrayList<>();
         fields.add(code);

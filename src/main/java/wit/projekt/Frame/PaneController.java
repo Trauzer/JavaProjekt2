@@ -12,39 +12,14 @@ import java.util.HashMap;
  * Klasa ta zawiera podstawowe funkcje do zarządzania tabelą, polami tekstowymi
  * i przyciskami.
  */
+
 public abstract class PaneController extends JPanel implements ActionListener {
-    /**
-     * Panel używany do przechowywania pól danych.
-     * Jest to panel do którego dodawane są pola tekstowe, etykiety itp.
-     */
-    protected JPanel fieldPanel = new JPanel();
-
-    /**
-     * Panel używany do przechowywania przycisków.
-     * Jest to panel do którego dodawane są przyciski.
-     */
-    protected JPanel buttonPanel = new JPanel();
-
-    /**
-     * Tabela wyświetlająca dane.
-     */
-    protected JTable table = new JTable();
-
-    /**
-     * Model danych tabeli.
-     */
-    protected DefaultTableModel model;
-
-    /**
-     * Mapa pól tekstowych.
-     * Kluczami są nazwy pól, a wartościami obiekty JTextField.
-     */
-    protected HashMap<String, JTextField> fields = new HashMap<>();
-
-    /**
-     * Numer zaznaczonego wiersza (-1 oznacza brak zaznaczenia).
-     */
-    protected int selectedRow = -1;
+    protected JPanel fieldPanel = new JPanel(); // Panel z polami tekstowymi
+    protected JPanel buttonPanel = new JPanel(); // Panel z przyciskami
+    protected JTable table = new JTable(); // Tabela
+    protected DefaultTableModel model; // Model tabeli
+    protected HashMap<String, JTextField> fields = new HashMap<>(); // Mapa pól tekstowych
+    protected int selectedRow = -1; // Numer zaznaczonego wiersza (-1 oznacza brak zaznaczenia)
 
     /**
      * Konstruktor klasy PaneController.
@@ -52,6 +27,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param name        Nazwa panelu
      * @param columnNames Tablica nazw kolumn tabeli
      */
+
     protected PaneController(String name, String[] columnNames) {
         setLayout(new BorderLayout());
         model = new DefaultTableModel(columnNames, 0);
@@ -80,6 +56,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * 
      * @param rowData Lista obiektów reprezentujących dane w wierszu
      */
+
     protected void addFieldToTable(ArrayList<Object> rowData) {
         model.addRow(rowData.toArray());
     }
@@ -90,6 +67,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param name Nazwa pola
      * @return Utworzone pole tekstowe
      */
+
     protected JTextField addField(String name) {
         JLabel label = new JLabel(name);
         JTextField textField = new JTextField(10);
@@ -106,6 +84,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param name          Nazwa przycisku
      * @return Utworzony przycisk
      */
+
     protected JButton createButton(String actionCommand, String name) {
         JButton button = new JButton(name);
         button.setActionCommand(actionCommand);
@@ -118,6 +97,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * 
      * @param row Numer wiersza do usunięcia
      */
+
     protected void deleteRow(int row) {
         model.removeRow(row);
     }
@@ -128,6 +108,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param rowData Lista obiektów reprezentujących nowe dane w wierszu
      * @param row     Numer wiersza do edycji
      */
+
     protected void editRow(ArrayList<Object> rowData, int row) {
         for (int i = 0; i < rowData.size(); i++) {
             model.setValueAt(rowData.get(i), row, i);
@@ -141,6 +122,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param id Identyfikator pola
      * @return Nazwa pola
      */
+
     protected abstract String getFieldNameFromID(String id);
 
     /**
@@ -150,6 +132,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * @param id Identyfikator przycisku
      * @return Nazwa przycisku
      */
+
     protected abstract String getButtonNamesFromID(String id);
 
     // Publiczne metody getter
@@ -159,6 +142,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * 
      * @return Tabela
      */
+
     public JTable getTable() {
         return table;
     }
@@ -168,6 +152,7 @@ public abstract class PaneController extends JPanel implements ActionListener {
      * 
      * @return Model danych tabeli
      */
+
     public DefaultTableModel getModel() {
         return model;
     }

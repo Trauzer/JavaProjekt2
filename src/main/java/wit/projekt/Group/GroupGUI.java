@@ -13,19 +13,12 @@ import java.awt.event.ActionEvent;
  * Rozszerza PaneController i zawiera interakcje użytkownika z interfejsem
  * użytkownika.
  */
+
 public class GroupGUI extends PaneController {
-    /**
-     * Zmienna przechowująca wszystkie grupy.
-     */
-    private GroupRegistry groupRegistry;
-    /**
-     * Zmienna przechowująca wszystkich studentów.
-     */
-    private StudentRegistry studentRegistry;
-    /**
-     * Interfejs użytkownika dla funkcjonalności związanych ze studentami.
-     */
-    private StudentGUI studentGUI;
+
+    private GroupRegistry groupRegistry; // Rejestr grup
+    private StudentRegistry studentRegistry; // Rejestr studentów
+    private StudentGUI studentGUI; // GUI dla studentów
 
     /**
      * Konstruktor klasy GroupGUI.
@@ -35,6 +28,7 @@ public class GroupGUI extends PaneController {
      * @param studentRegistry Rejestr studentów
      * @param studentGUI      Interfejs GUI studenta
      */
+
     public GroupGUI(String name, GroupRegistry groupRegistry, StudentRegistry studentRegistry, StudentGUI studentGUI) {
         super(name, new String[] { "Kod Grupy", "Specjalizacja", "Opis" });
         this.groupRegistry = groupRegistry;
@@ -119,6 +113,7 @@ public class GroupGUI extends PaneController {
      * 
      * @return Panel GUI
      */
+
     public JPanel getPanel() {
         return this;
     }
@@ -247,6 +242,7 @@ public class GroupGUI extends PaneController {
      * 
      * @param groupCode Kod grupy do wyszukania
      */
+
     private void searchGroup(String groupCode) {
         Group group = groupRegistry.getGroupByCode(groupCode);
 
